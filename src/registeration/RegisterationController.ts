@@ -11,7 +11,7 @@ export class RegisterationController extends Controller {
         return this.registerationService.listById(id);
     }
 
-    @Post('')
+    @Post('create')
     public async saveRegisteration(@Body() registeration: RegisterationModel) {
         return this.registerationService.registerCourse(registeration)
     }

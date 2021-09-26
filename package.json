@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install && npx tsoa routes && npx tsc",
-    "start": "npx tsoa routes && npx tsc"
+    "start": "rm -fr dist && rm -rf generated && npx tsoa routes && npx tsc"
   },
   "author": "",
   "license": "ISC",

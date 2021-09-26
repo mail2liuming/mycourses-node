@@ -1,9 +1,9 @@
 export interface RegisterationModel {
     userId: string;
-    courseID: string;
+    courseId: string;
     name: string;
     date: string;
     cost: number;
-    repeatalbe: boolean;
+    repeatable: boolean;
 
 }

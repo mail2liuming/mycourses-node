@@ -1,0 +1,49 @@
+ {
+   "GlobalSecondaryIndexes": [ 
+      { 
+         "IndexName": "gsiCourseTable",
+         "KeySchema": [ 
+            { 
+               "AttributeName": "userId",
+               "KeyType": "HASH"
+            },
+            { 
+               "AttributeName": "courseId",
+               "KeyType": "RANGE"
+            }
+         ],
+         "Projection": { 
+            "ProjectionType": "ALL"
+         },
+         "ProvisionedThroughput": { 
+            "ReadCapacityUnits": 1,
+            "WriteCapacityUnits": 1
+         }
+      }
+   ],
+   "AttributeDefinitions": [ 
+      { 
+         "AttributeName": "userId",
+         "AttributeType": "S"
+      },
+      { 
+         "AttributeName": "courseId",
+         "AttributeType": "S"
+      }
+   ],
+   "KeySchema": [ 
+      { 
+         "AttributeName": "courseId",
+         "KeyType": "HASH"
+      },
+      { 
+         "AttributeName": "userId",
+         "KeyType": "RANGE"
+      }
+   ],
+   "ProvisionedThroughput": { 
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
+   },
+   "TableName": "CourseTable"
+}

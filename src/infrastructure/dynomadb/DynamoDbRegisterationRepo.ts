@@ -26,14 +26,14 @@ export class DynamoDbRegisterationRepo implements RegisterationRepo {
         const params = {
             TableName: "CourseTable",
             Item: {
-                courseId: registerationModel.courseID,
+                courseId: registerationModel.courseId,
                 userId: registerationModel.userId,
                 books: [
                     {
                         address: registerationModel.name,
                         date: registerationModel.date,
                         cost: registerationModel.cost,
-                        repeatable: registerationModel.repeatalbe
+                        repeatable: registerationModel.repeatable
                     }
                 ]
             }
