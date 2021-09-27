@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && npx tsoa routes && npx tsc",
+    "build": "node_modules/typescript/bin/tsc",
     "start": "rm -fr dist && rm -rf generated && npx tsoa routes && npx tsc"
   },
   "author": "",
@@ -13,6 +13,7 @@
     "@aws-sdk/client-dynamodb": "^3.30.0",
     "@aws-sdk/lib-dynamodb": "^3.30.0",
     "@aws-sdk/util-dynamodb": "^3.32.0",
+    "@vendia/serverless-express": "^4.3.11",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
@@ -20,11 +21,12 @@
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.29.0",
+    "@tsoa/cli": "^3.11.2",
     "@types/body-parser": "^1.19.1",
     "@types/express": "^4.17.13",
     "@types/node": "^16.7.10",
+    "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.3",
-    "nodemon": "^2.0.12"
+    "typescript": "^4.4.3"
   }
 }
