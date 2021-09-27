@@ -4,9 +4,14 @@ import { RegisterationRepo } from "../../registeration/RegisterationRepo";
 import { ddbDocClient } from "./DynamoDbDocClient";
 
 export class DynamoDbRegisterationRepo implements RegisterationRepo {
+    getTableName(): string {
+        console.log("process.env.CourseTable is : " + process.env.CourseTable)
+        return process.env.CourseTable == undefined ? "CourseTable" : process.env.CourseTable;
+    }
+
     async getListByUserId(userId: string): Promise<RegisterationModel[]> {
         const getListParams = {
-            TableName: "CourseTable",
+            TableName: this.getTableName(),
             IndexName: "gsiCourseTable",
             KeyConditionExpression: "userId = :user",
             ExpressionAttributeValues: {
@@ -24,7 +29,7 @@ export class DynamoDbRegisterationRepo implements RegisterationRepo {
     }
     async createRegister(registerationModel: RegisterationModel): Promise<RegisterationModel> {
         const params = {
-            TableName: "CourseTable",
+            TableName: this.getTableName(),
             Item: {
                 courseId: registerationModel.courseId,
                 userId: registerationModel.userId,
