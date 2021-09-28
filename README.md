@@ -8,7 +8,12 @@ DYNAMO_ENDPOINT=http://localhost:8090 dynamodb-admin
 
 aws dynamodb create-table --cli-input-json file://local/create-local-table.json --endpoint-url http://localhost:8090
 
-#reference
+# sam
+
+sam build
+sam deploy
+
+# reference
 
 https://evilmartians.com/chronicles/serverless-typescript-a-complete-setup-for-aws-sam-lambda
 https://github.com/aaronshaf/dynamodb-admin

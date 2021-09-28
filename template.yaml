@@ -11,7 +11,7 @@ Globals:
     Timeout: 3
     Environment:
       Variables:
-        REGION: ${AWS::Region}
+        REGION: AWS::Region
         CourseTable: !Ref CourseTable
     Layers:
       - !Ref RuntimeDependenciesLayer
