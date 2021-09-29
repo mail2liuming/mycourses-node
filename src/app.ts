@@ -1,16 +1,13 @@
 import express from "express";
-import bodyParser from "body-parser";
+import cors from "cors";
+
 import { RegisterRoutes } from "../generated/routes";
 
 export const app = express();
 
-// Use body parser to read sent json payloads
-app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
-);
-app.use(bodyParser.json());
+app.use(express.urlencoded())
+app.use(express.json());
+app.use(cors())
 
 RegisterRoutes(app);
 
