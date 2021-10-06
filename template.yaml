@@ -22,7 +22,14 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: prod
-      BinaryMediaTypes: ['*/*']
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+      Auth:
+         Authorizers:
+           CognitoAuthorizer:
+             UserPoolArn: arn:aws:cognito-idp:us-east-1:773988152227:userpool/us-east-1_9N5wUi5le
 
   ExpressLambdaFunction:
     Type: AWS::Serverless::Function
@@ -42,12 +49,17 @@ Resources:
             RestApiId: !Ref ExpressApi
             Path: /
             Method: ANY
+            Auth:
+              Authorizer: CognitoAuthorizer
         ProxyApiGreedy:
           Type: Api
           Properties:
             RestApiId: !Ref ExpressApi
             Path: /{proxy+}
             Method: ANY
+            Auth:
+              Authorizer: CognitoAuthorizer
+      
   
   RuntimeDependenciesLayer:
     Type: AWS::Serverless::LayerVersion
