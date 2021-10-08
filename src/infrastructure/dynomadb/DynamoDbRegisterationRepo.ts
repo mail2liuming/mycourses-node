@@ -1,5 +1,7 @@
 import { PutCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
-import { RegisterationModel } from "../../registeration/RegisterationModel";
+import { randomUUID } from "crypto";
+import { RegisterationDTO } from "../../registeration/RegisterationDTO";
+import { RegisterationModel, transferFromDTO } from "../../registeration/RegisterationModel";
 import { RegisterationRepo } from "../../registeration/RegisterationRepo";
 import { ddbDocClient } from "./DynamoDbDocClient";
 
@@ -15,7 +17,7 @@ export class DynamoDbRegisterationRepo implements RegisterationRepo {
             IndexName: "gsiCourseTable",
             KeyConditionExpression: "userId = :user",
             ExpressionAttributeValues: {
-                ":user": userId
+                ":user": `#USER-${userId}`
             },
         };
         try {
@@ -27,27 +29,22 @@ export class DynamoDbRegisterationRepo implements RegisterationRepo {
             throw new Error(err as string);
         }
     }
-    async createRegister(registerationModel: RegisterationModel): Promise<RegisterationModel> {
+    async createRegister(registerationDTO: RegisterationDTO): Promise<RegisterationModel> {
         const params = {
             TableName: this.getTableName(),
             Item: {
-                courseId: registerationModel.courseId,
-                userId: registerationModel.userId,
-                books: [
-                    {
-                        address: registerationModel.name,
-                        date: registerationModel.date,
-                        cost: registerationModel.cost,
-                        repeatable: registerationModel.repeatable
-                    }
-                ]
+                courseId: `#COURSE-${registerationDTO.courseName}-${randomUUID()}`,
+                userId: `#USER-${registerationDTO.userEmail}`,
+                name: registerationDTO.courseName,
+                courses: registerationDTO.courses,
+                frequency: registerationDTO.frequency
             }
         }
 
         try {
             const data = await ddbDocClient.send(new PutCommand(params));
             console.log("Success - item", data);
-            return registerationModel;
+            return transferFromDTO(registerationDTO);
         } catch (err) {
             console.log("Error", err);
             throw new Error(err as string);

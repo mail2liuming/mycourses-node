@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Path, Post, Route } from "@tsoa/runtime";
+import { RegisterationDTO } from "./RegisterationDTO";
 import { RegisterationModel } from "./RegisterationModel";
 import { RegisterationService } from "./RegisterationService";
 
@@ -12,7 +13,7 @@ export class RegisterationController extends Controller {
     }
 
     @Post('create')
-    public async saveRegisteration(@Body() registeration: RegisterationModel) {
+    public async saveRegisteration(@Body() registeration: RegisterationDTO) {
         return this.registerationService.registerCourse(registeration)
     }
 }
