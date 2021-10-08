@@ -16,5 +16,7 @@ sam deploy
 # reference
 
 https://evilmartians.com/chronicles/serverless-typescript-a-complete-setup-for-aws-sam-lambda
+
 https://github.com/aaronshaf/dynamodb-admin
+
 https://github.com/vendia/serverless-express
