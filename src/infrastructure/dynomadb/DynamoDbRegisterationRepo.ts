@@ -30,21 +30,22 @@ export class DynamoDbRegisterationRepo implements RegisterationRepo {
         }
     }
     async createRegister(registerationDTO: RegisterationDTO): Promise<RegisterationModel> {
+        const model = transferFromDTO(registerationDTO);
         const params = {
             TableName: this.getTableName(),
             Item: {
-                courseId: `#COURSE-${registerationDTO.courseName}-${randomUUID()}`,
-                userId: `#USER-${registerationDTO.userEmail}`,
-                name: registerationDTO.courseName,
-                courses: registerationDTO.courses,
-                frequency: registerationDTO.frequency
+                courseId: `#COURSE-${model.courseId}`,
+                userId: `#USER-${model.userId}`,
+                name: model.name,
+                courses: model.courses,
+                frequency: model.frequency
             }
         }
 
         try {
             const data = await ddbDocClient.send(new PutCommand(params));
             console.log("Success - item", data);
-            return transferFromDTO(registerationDTO);
+            return model;
         } catch (err) {
             console.log("Error", err);
             throw new Error(err as string);
