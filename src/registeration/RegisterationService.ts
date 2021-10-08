@@ -5,7 +5,11 @@ import { RegisterationModel } from "./RegisterationModel";
 import { RegisterationRepo } from "./RegisterationRepo";
 
 export class RegisterationService {
-    repo: RegisterationRepo = new DynamoDbRegisterationRepo()
+    private repo: RegisterationRepo;
+    constructor(repo: RegisterationRepo) {
+        this.repo = repo;
+    }
+
     public async listById(userId: string): Promise<Array<RegisterationModel>> {
         return this.repo.getListByUserId(userId);
     }
