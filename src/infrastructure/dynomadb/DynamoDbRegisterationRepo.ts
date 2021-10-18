@@ -37,6 +37,7 @@ export class DynamoDbRegisterationRepo implements RegisterationRepo {
                 courseId: `#COURSE-${model.courseId}`,
                 userId: `#USER-${model.userId}`,
                 name: model.name,
+                kidName: model.kidName,
                 courses: model.courses,
                 frequency: model.frequency
             }

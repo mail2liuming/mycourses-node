@@ -13,6 +13,7 @@ export interface RegisterationModel {
     userId: string;
     courseId: string;
     name: string;
+    kidName: string;
     courses: CourseRun[]
     frequency: CourseFrequency;
 }
@@ -22,6 +23,7 @@ export function transferFromDTO(dto: RegisterationDTO): RegisterationModel {
         userId: dto.userEmail,
         courseId: `${dto.courseName} - ${randomUUID()}`,
         name: dto.courseName,
+        kidName: dto.kidName,
         courses: dto.courses,
         frequency: dto.frequency
     }
